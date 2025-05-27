@@ -20,14 +20,13 @@
         Votre navigateur ne supporte pas la lecture vidéo.
       </video>
       <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
-           data-a2a-url="https://horus911.github.io/sharehub-media-site/#video1"
+           data-a2a-url="https://horus911.github.io/sharehub-media-site/media/video1.mp4"
            data-a2a-title="Regarde la vidéo 1 sur ShareHub">
         <a class="a2a_button_facebook"></a>
         <a class="a2a_button_twitter"></a>
         <a class="a2a_button_copy_link"></a>
       </div>
     </section>
-
     <section id="video2">
       <h2>📹 Vidéo 2</h2>
       <video controls width="100%">
@@ -35,42 +34,85 @@
         Votre navigateur ne supporte pas la lecture vidéo.
       </video>
       <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
-           data-a2a-url="https://horus911.github.io/sharehub-media-site/#video2"
+           data-a2a-url="https://horus911.github.io/sharehub-media-site/media/video2.mp4"
            data-a2a-title="Regarde la vidéo 2 sur ShareHub">
         <a class="a2a_button_facebook"></a>
         <a class="a2a_button_twitter"></a>
         <a class="a2a_button_copy_link"></a>
       </div>
     </section>
-
     <section id="image1">
       <h2>🖼️ Image 1</h2>
       <img src="media/image1.jpg" alt="Image 1" style="max-width: 100%; height: auto;" />
       <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
-           data-a2a-url="https://horus911.github.io/sharehub-media-site/#image1"
+           data-a2a-url="https://horus911.github.io/sharehub-media-site/media/image1.jpg"
            data-a2a-title="Regarde l'image 1 sur ShareHub">
         <a class="a2a_button_facebook"></a>
         <a class="a2a_button_twitter"></a>
         <a class="a2a_button_copy_link"></a>
       </div>
     </section>
-
     <section id="image2">
       <h2>🖼️ Image 2</h2>
       <img src="media/image2.jpg" alt="Image 2" style="max-width: 100%; height: auto;" />
       <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
-           data-a2a-url="https://horus911.github.io/sharehub-media-site/#image2"
+           data-a2a-url="https://horus911.github.io/sharehub-media-site/media/image2.jpg"
            data-a2a-title="Regarde l'image 2 sur ShareHub">
         <a class="a2a_button_facebook"></a>
         <a class="a2a_button_twitter"></a>
         <a class="a2a_button_copy_link"></a>
       </div>
     </section>
-  </main>
+  
+<section id="upload">
+  <h2>📤 Ajouter un média local</h2>
+  <input type="file" id="fileInput" accept="image/*,video/*" />
+  <div id="preview"></div>
+  <div id="shareButtons" class="a2a_kit a2a_kit_size_32 a2a_default_style" style="display: none;"
+       data-a2a-url="" data-a2a-title="Partage ton média sur ShareHub">
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_copy_link"></a>
+  </div>
+</section>
+
+<script>
+  document.getElementById('fileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('preview');
+    const shareButtons = document.getElementById('shareButtons');
+    preview.innerHTML = '';
+    shareButtons.style.display = 'none';
+
+    if (file) {
+      const url = URL.createObjectURL(file);
+      let media;
+      if (file.type.startsWith('image/')) {
+        media = document.createElement('img');
+        media.src = url;
+        media.style.maxWidth = '100%';
+        media.alt = 'Image locale';
+      } else if (file.type.startsWith('video/')) {
+        media = document.createElement('video');
+        media.src = url;
+        media.controls = true;
+        media.style.maxWidth = '100%';
+      }
+
+      if (media) {
+        preview.appendChild(media);
+        shareButtons.setAttribute('data-a2a-url', url);
+        shareButtons.style.display = 'block';
+        if (window.a2a) a2a.init_all();
+      }
+    }
+  });
+</script>
+
+</main>
   <footer>
     <p>© 2025 ShareHub</p>
   </footer>
-
   <script async src="https://static.addtoany.com/menu/page.js"></script>
 </body>
 </html>
