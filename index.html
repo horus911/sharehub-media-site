@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShareHub - Media Share</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <h1>ShareHub</h1>
+    <p>Upload and share your media instantly</p>
+  </header>
+
+  <main>
+    <section class="upload-section">
+      <h2>Upload your media</h2>
+      <input type="file" id="media-upload" multiple />
+    </section>
+
+    <section class="library" id="library">
+      <h2>Your Uploaded Media</h2>
+    </section>
+  
+    <section class="text-share">
+      <h2>Write and Share Text</h2>
+      <textarea id="text-input" placeholder="Write your message here..."></textarea>
+      <button id="share-text">Share Text</button>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 ShareHub. All rights reserved.</p>
+  </footer>
+
+  <!-- AddToAny BEGIN -->
+  <div class="a2a_kit a2a_default_style a2a_kit_size_32">
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_whatsapp"></a>
+    <a class="a2a_button_copy_link"></a>
+  </div>
+  <script async src="https://static.addtoany.com/menu/page.js"></script>
+  <!-- AddToAny END -->
+
+  <script src="script.js"></script>
+</body>
+</html>
