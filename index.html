@@ -1,49 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ShareHub - Media Share</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="description" content="Partage facile de vidéos, images, fichiers et textes." />
+  <meta property="og:title" content="ShareHub - Media Share" />
+  <meta property="og:description" content="Partage facile de vidéos, images, fichiers et textes." />
+  <meta property="og:image" content="https://horus911.github.io/sharehub-media-site/preview-image.png" />
+  <meta property="og:url" content="https://horus911.github.io/sharehub-media-site/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ShareHub - Media Share" />
+  <meta name="twitter:description" content="Partage facile de vidéos, images, fichiers et textes." />
+  <meta name="twitter:image" content="https://horus911.github.io/sharehub-media-site/preview-image.png" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>ShareHub</h1>
-    <p>Upload and share your media instantly</p>
+    <h1>📤 ShareHub - Media Share</h1>
+    <p>Partagez facilement vos vidéos, images, fichiers et textes.</p>
   </header>
-
   <main>
-    <section class="upload-section">
-      <h2>Upload your media</h2>
-      <input type="file" id="media-upload" multiple />
+    <section>
+      <h2>📹 Vidéo</h2>
+      <video controls width="100%">
+        <source src="media/video.mp4" type="video/mp4" />
+        Votre navigateur ne supporte pas la lecture vidéo.
+      </video>
+    </section>
+    <section>
+      <h2>🖼️ Image</h2>
+      <img src="media/image.jpg" alt="Image partagée" style="max-width: 100%; height: auto;" />
+    </section>
+    <section>
+      <h2>📄 Fichier</h2>
+      <a href="media/fichier.pdf" download>Télécharger le fichier PDF</a>
+    </section>
+    <section>
+      <h2>📝 Texte</h2>
+      <div class="text-content">
+        <p>Ceci est un exemple de texte partagé sur ShareHub.</p>
+      </div>
     </section>
 
-    <section class="library" id="library">
-      <h2>Your Uploaded Media</h2>
+    <!-- Boutons de partage AddToAny -->
+    <section>
+      <h2>🔗 Partager</h2>
+      <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
+           data-a2a-url="https://horus911.github.io/sharehub-media-site/"
+           data-a2a-title="ShareHub - Media Share">
+        <a class="a2a_button_facebook"></a>
+        <a class="a2a_button_twitter"></a>
+        <a class="a2a_button_whatsapp"></a>
+        <a class="a2a_button_telegram"></a>
+        <a class="a2a_button_email"></a>
+        <a class="a2a_button_copy_link"></a>
+      </div>
+      <script async src="https://static.addtoany.com/menu/page.js"></script>
     </section>
-  
-    <section class="text-share">
-      <h2>Write and Share Text</h2>
-      <textarea id="text-input" placeholder="Write your message here..."></textarea>
-      <button id="share-text">Share Text</button>
-    </section>
-
   </main>
-
   <footer>
-    <p>&copy; 2025 ShareHub. All rights reserved.</p>
+    <p>© 2025 ShareHub - Tous droits réservés.</p>
   </footer>
-
-  <!-- AddToAny BEGIN -->
-  <div class="a2a_kit a2a_default_style a2a_kit_size_32">
-    <a class="a2a_button_facebook"></a>
-    <a class="a2a_button_twitter"></a>
-    <a class="a2a_button_whatsapp"></a>
-    <a class="a2a_button_copy_link"></a>
-  </div>
-  <script async src="https://static.addtoany.com/menu/page.js"></script>
-  <!-- AddToAny END -->
-
-  <script src="script.js"></script>
 </body>
 </html>
