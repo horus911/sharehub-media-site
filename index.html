@@ -1,144 +1,185 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ShareMedia Statique</title>
-<style>
-  body {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    background: #f0f8ff;
-    margin: 0; padding: 20px;
-    color: #333;
-  }
-  h1 {
-    text-align: center;
-    color: #3a86ff;
-  }
-  .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-  }
-  .gallery-item {
-    border: 3px solid #3a86ff;
-    border-radius: 10px;
-    padding: 5px;
-    width: 150px;
-    text-align: center;
-    background: #e0f7ff;
-  }
-  .gallery-item img,
-  .gallery-item video {
-    max-width: 100%;
-    border-radius: 8px;
-  }
-  .upload-section {
-    margin: 20px auto;
-    max-width: 500px;
-    text-align: center;
-  }
-  input[type="file"] {
-    margin: 10px 0;
-  }
-  audio, video {
-    width: 100%;
-    margin-top: 10px;
-  }
-  form {
-    max-width: 400px;
-    margin: 30px auto;
-    background: #cce7ff;
-    padding: 15px;
-    border-radius: 10px;
-  }
-  form input, form textarea {
-    width: 100%;
-    margin: 5px 0 15px;
-    padding: 8px;
-    border: 2px solid #3a86ff;
-    border-radius: 6px;
-    font-size: 1em;
-  }
-  form button {
-    background: #3a86ff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1em;
-  }
-  form button:hover {
-    background: #265dff;
-  }
-</style>
-</head>
-<body>
-
-<h1>ShareMedia Statique</h1>
-
-<section class="upload-section">
-  <h2>Uploader un média (preview seulement)</h2>
-  <input type="file" id="fileInput" accept="image/*,video/*,audio/*" />
-  <div id="preview"></div>
-</section>
-
-<section class="gallery" id="gallery">
-  <h2>Galerie</h2>
-  <!-- Items ajoutés via JS -->
-</section>
-
-<section>
-  <h2>Contact</h2>
-  <form action="https://formspree.io/f/mwkajqzo" method="POST">
-    <input type="email" name="email" placeholder="Votre email" required />
-    <textarea name="message" placeholder="Votre message" rows="4" required></textarea>
-    <button type="submit">Envoyer</button>
-  </form>
-</section>
-
-<script>
-  const fileInput = document.getElementById('fileInput');
-  const preview = document.getElementById('preview');
-  const gallery = document.getElementById('gallery');
-
-  fileInput.addEventListener('change', e => {
-    preview.innerHTML = ''; // clear previous preview
-
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const url = URL.createObjectURL(file);
-    let element;
-
-    if (file.type.startsWith('image/')) {
-      element = document.createElement('img');
-      element.src = url;
-    } else if (file.type.startsWith('video/')) {
-      element = document.createElement('video');
-      element.src = url;
-      element.controls = true;
-    } else if (file.type.startsWith('audio/')) {
-      element = document.createElement('audio');
-      element.src = url;
-      element.controls = true;
-    } else {
-      preview.textContent = 'Type de fichier non supporté pour la prévisualisation.';
-      return;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShareMedia - Galerie Cartoon</title>
+  
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* Style global */
+    body {
+      background: #ffe4e1;
+      color: #333;
+      font-family: 'Luckiest Guy', cursive, sans-serif;
+      margin: 0; padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
     }
 
-    preview.appendChild(element);
+    h1 {
+      color: #ff4500;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px #ffa07a;
+    }
 
-    // Ajouter aussi dans la galerie statique (temporaire)
-    const galleryItem = document.createElement('div');
-    galleryItem.className = 'gallery-item';
-    const clone = element.cloneNode(true);
-    galleryItem.appendChild(clone);
-    gallery.appendChild(galleryItem);
-  });
-</script>
+    /* Galerie */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      width: 100%;
+      max-width: 900px;
+    }
 
+    .gallery-item {
+      background: #fff0f0;
+      border: 3px solid #ff6347;
+      border-radius: 15px;
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+      overflow: hidden;
+      width: 220px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img,
+    .gallery-item:hover video {
+      transform: scale(1.1) rotate(3deg);
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Formulaire upload simple */
+    form {
+      margin-top: 30px;
+      background: #fff0f0;
+      padding: 15px 25px;
+      border: 3px solid #ff6347;
+      border-radius: 15px;
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    input[type="file"] {
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #ff4500;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 0 #cc3700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      box-shadow: none;
+      transform: translateY(2px);
+    }
+
+    /* Lecteur audio/vidéo */
+    audio, video {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .gallery {
+        flex-direction: column;
+        align-items: center;
+      }
+      .gallery-item {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>ShareMedia - Galerie Cartoon</h1>
+
+  <div class="gallery" id="gallery">
+    <!-- Exemples d'images et vidéos -->
+    <div class="gallery-item">
+      <img src="https://placekitten.com/300/200" alt="Chat mignon" />
+    </div>
+    <div class="gallery-item">
+      <video controls>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+        Votre navigateur ne supporte pas la vidéo.
+      </video>
+    </div>
+    <div class="gallery-item">
+      <audio controls>
+        <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg" />
+        Votre navigateur ne supporte pas l'audio.
+      </audio>
+    </div>
+  </div>
+
+  <form id="uploadForm" action="https://formspree.io/f/mwkajnzn" method="POST" enctype="multipart/form-data">
+    <input type="file" name="media" accept="image/*,video/*,audio/*" required />
+    <br />
+    <button type="submit">Envoyer</button>
+  </form>
+  
+  <script>
+    // Optionnel : prévisualisation du fichier sélectionné avant envoi
+    const inputFile = document.querySelector('input[type="file"]');
+    const gallery = document.getElementById('gallery');
+
+    inputFile.addEventListener('change', () => {
+      const file = inputFile.files[0];
+      if (!file) return;
+
+      const url = URL.createObjectURL(file);
+      let newElem;
+
+      if (file.type.startsWith('image/')) {
+        newElem = document.createElement('div');
+        newElem.className = 'gallery-item';
+        newElem.innerHTML = `<img src="${url}" alt="Image sélectionnée" />`;
+      } else if (file.type.startsWith('video/')) {
+        newElem = document.createElement('div');
+        newElem.className = 'gallery-item';
+        newElem.innerHTML = `<video controls src="${url}"></video>`;
+      } else if (file.type.startsWith('audio/')) {
+        newElem = document.createElement('div');
+        newElem.className = 'gallery-item';
+        newElem.innerHTML = `<audio controls src="${url}"></audio>`;
+      }
+
+      if (newElem) {
+        // Insérer avant le formulaire
+        gallery.insertBefore(newElem, gallery.firstChild);
+      }
+    });
+  </script>
 </body>
 </html>
