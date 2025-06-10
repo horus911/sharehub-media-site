@@ -1,118 +1,144 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ShareHub - Media Share</title>
-  <meta name="description" content="Partage de plusieurs vidéos et images." />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ShareMedia Statique</title>
+<style>
+  body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: #f0f8ff;
+    margin: 0; padding: 20px;
+    color: #333;
+  }
+  h1 {
+    text-align: center;
+    color: #3a86ff;
+  }
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .gallery-item {
+    border: 3px solid #3a86ff;
+    border-radius: 10px;
+    padding: 5px;
+    width: 150px;
+    text-align: center;
+    background: #e0f7ff;
+  }
+  .gallery-item img,
+  .gallery-item video {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  .upload-section {
+    margin: 20px auto;
+    max-width: 500px;
+    text-align: center;
+  }
+  input[type="file"] {
+    margin: 10px 0;
+  }
+  audio, video {
+    width: 100%;
+    margin-top: 10px;
+  }
+  form {
+    max-width: 400px;
+    margin: 30px auto;
+    background: #cce7ff;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  form input, form textarea {
+    width: 100%;
+    margin: 5px 0 15px;
+    padding: 8px;
+    border: 2px solid #3a86ff;
+    border-radius: 6px;
+    font-size: 1em;
+  }
+  form button {
+    background: #3a86ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  form button:hover {
+    background: #265dff;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>📤 ShareHub - Media Share</h1>
-    <p>Partage de plusieurs vidéos et images</p>
-  </header>
-  <main>
-    <section id="video1">
-      <h2>📹 Vidéo 1</h2>
-      <video controls width="100%">
-        <source src="media/video1.mp4" type="video/mp4" />
-        Votre navigateur ne supporte pas la lecture vidéo.
-      </video>
-      <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
-           data-a2a-url="https://horus911.github.io/sharehub-media-site/media/video1.mp4"
-           data-a2a-title="Regarde la vidéo 1 sur ShareHub">
-        <a class="a2a_button_facebook"></a>
-        <a class="a2a_button_twitter"></a>
-        <a class="a2a_button_copy_link"></a>
-      </div>
-    </section>
-    <section id="video2">
-      <h2>📹 Vidéo 2</h2>
-      <video controls width="100%">
-        <source src="media/video2.mp4" type="video/mp4" />
-        Votre navigateur ne supporte pas la lecture vidéo.
-      </video>
-      <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
-           data-a2a-url="https://horus911.github.io/sharehub-media-site/media/video2.mp4"
-           data-a2a-title="Regarde la vidéo 2 sur ShareHub">
-        <a class="a2a_button_facebook"></a>
-        <a class="a2a_button_twitter"></a>
-        <a class="a2a_button_copy_link"></a>
-      </div>
-    </section>
-    <section id="image1">
-      <h2>🖼️ Image 1</h2>
-      <img src="media/image1.jpg" alt="Image 1" style="max-width: 100%; height: auto;" />
-      <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
-           data-a2a-url="https://horus911.github.io/sharehub-media-site/media/image1.jpg"
-           data-a2a-title="Regarde l'image 1 sur ShareHub">
-        <a class="a2a_button_facebook"></a>
-        <a class="a2a_button_twitter"></a>
-        <a class="a2a_button_copy_link"></a>
-      </div>
-    </section>
-    <section id="image2">
-      <h2>🖼️ Image 2</h2>
-      <img src="media/image2.jpg" alt="Image 2" style="max-width: 100%; height: auto;" />
-      <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
-           data-a2a-url="https://horus911.github.io/sharehub-media-site/media/image2.jpg"
-           data-a2a-title="Regarde l'image 2 sur ShareHub">
-        <a class="a2a_button_facebook"></a>
-        <a class="a2a_button_twitter"></a>
-        <a class="a2a_button_copy_link"></a>
-      </div>
-    </section>
-  
-<section id="upload">
-  <h2>📤 Ajouter un média local</h2>
-  <input type="file" id="fileInput" accept="image/*,video/*" />
+
+<h1>ShareMedia Statique</h1>
+
+<section class="upload-section">
+  <h2>Uploader un média (preview seulement)</h2>
+  <input type="file" id="fileInput" accept="image/*,video/*,audio/*" />
   <div id="preview"></div>
-  <div id="shareButtons" class="a2a_kit a2a_kit_size_32 a2a_default_style" style="display: none;"
-       data-a2a-url="" data-a2a-title="Partage ton média sur ShareHub">
-    <a class="a2a_button_facebook"></a>
-    <a class="a2a_button_twitter"></a>
-    <a class="a2a_button_copy_link"></a>
-  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <h2>Galerie</h2>
+  <!-- Items ajoutés via JS -->
+</section>
+
+<section>
+  <h2>Contact</h2>
+  <form action="https://formspree.io/f/mwkajqzo" method="POST">
+    <input type="email" name="email" placeholder="Votre email" required />
+    <textarea name="message" placeholder="Votre message" rows="4" required></textarea>
+    <button type="submit">Envoyer</button>
+  </form>
 </section>
 
 <script>
-  document.getElementById('fileInput').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    const preview = document.getElementById('preview');
-    const shareButtons = document.getElementById('shareButtons');
-    preview.innerHTML = '';
-    shareButtons.style.display = 'none';
+  const fileInput = document.getElementById('fileInput');
+  const preview = document.getElementById('preview');
+  const gallery = document.getElementById('gallery');
 
-    if (file) {
-      const url = URL.createObjectURL(file);
-      let media;
-      if (file.type.startsWith('image/')) {
-        media = document.createElement('img');
-        media.src = url;
-        media.style.maxWidth = '100%';
-        media.alt = 'Image locale';
-      } else if (file.type.startsWith('video/')) {
-        media = document.createElement('video');
-        media.src = url;
-        media.controls = true;
-        media.style.maxWidth = '100%';
-      }
+  fileInput.addEventListener('change', e => {
+    preview.innerHTML = ''; // clear previous preview
 
-      if (media) {
-        preview.appendChild(media);
-        shareButtons.setAttribute('data-a2a-url', url);
-        shareButtons.style.display = 'block';
-        if (window.a2a) a2a.init_all();
-      }
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const url = URL.createObjectURL(file);
+    let element;
+
+    if (file.type.startsWith('image/')) {
+      element = document.createElement('img');
+      element.src = url;
+    } else if (file.type.startsWith('video/')) {
+      element = document.createElement('video');
+      element.src = url;
+      element.controls = true;
+    } else if (file.type.startsWith('audio/')) {
+      element = document.createElement('audio');
+      element.src = url;
+      element.controls = true;
+    } else {
+      preview.textContent = 'Type de fichier non supporté pour la prévisualisation.';
+      return;
     }
+
+    preview.appendChild(element);
+
+    // Ajouter aussi dans la galerie statique (temporaire)
+    const galleryItem = document.createElement('div');
+    galleryItem.className = 'gallery-item';
+    const clone = element.cloneNode(true);
+    galleryItem.appendChild(clone);
+    gallery.appendChild(galleryItem);
   });
 </script>
 
-</main>
-  <footer>
-    <p>© 2025 ShareHub</p>
-  </footer>
-  <script async src="https://static.addtoany.com/menu/page.js"></script>
 </body>
 </html>
