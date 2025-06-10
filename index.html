@@ -3,139 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ShareMedia - Galerie Cartoon</title>
-  
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet" />
-  
+  <title>ShareMedia - Galerie simple responsive</title>
   <style>
-    /* Style global */
+    /* Mise en page simple et responsive */
     body {
-      background: #ffe4e1;
-      color: #333;
-      font-family: 'Luckiest Guy', cursive, sans-serif;
-      margin: 0; padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
+      font-family: Arial, sans-serif;
+      margin: 10px;
+      padding: 0;
     }
-
-    h1 {
-      color: #ff4500;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px #ffa07a;
-    }
-
-    /* Galerie */
-    .gallery {
+    #gallery {
       display: flex;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 10px;
       justify-content: center;
+    }
+    #gallery > div {
+      flex: 1 1 300px;
+      max-width: 300px;
+    }
+    img, video, audio {
       width: 100%;
-      max-width: 900px;
+      height: auto;
+      display: block;
     }
-
-    .gallery-item {
-      background: #fff0f0;
-      border: 3px solid #ff6347;
-      border-radius: 15px;
-      box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
-      overflow: hidden;
-      width: 220px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-    }
-
-    .gallery-item img,
-    .gallery-item video {
-      width: 100%;
-      border-radius: 12px;
-      transition: transform 0.3s ease;
-    }
-
-    .gallery-item:hover img,
-    .gallery-item:hover video {
-      transform: scale(1.1) rotate(3deg);
-      box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-    }
-
-    /* Formulaire upload simple */
     form {
-      margin-top: 30px;
-      background: #fff0f0;
-      padding: 15px 25px;
-      border: 3px solid #ff6347;
-      border-radius: 15px;
-      box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
-      max-width: 400px;
-      width: 100%;
+      margin-top: 20px;
       text-align: center;
     }
-
     input[type="file"] {
-      margin-bottom: 15px;
-      cursor: pointer;
+      margin-bottom: 10px;
     }
-
     button {
-      background-color: #ff4500;
-      color: white;
-      font-weight: bold;
       padding: 10px 20px;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 0 #cc3700;
+      font-size: 1rem;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
-
-    button:hover {
-      box-shadow: none;
-      transform: translateY(2px);
-    }
-
-    /* Lecteur audio/vidéo */
-    audio, video {
-      width: 100%;
-      border-radius: 12px;
-      margin-top: 10px;
-    }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      .gallery {
-        flex-direction: column;
-        align-items: center;
-      }
-      .gallery-item {
-        width: 90%;
+    @media (max-width: 400px) {
+      #gallery > div {
+        flex-basis: 100%;
+        max-width: 100%;
       }
     }
   </style>
 </head>
 
 <body>
-  <h1>ShareMedia - Galerie Cartoon</h1>
+  <h1>ShareMedia - Galerie simple</h1>
 
-  <div class="gallery" id="gallery">
-    <!-- Exemples d'images et vidéos -->
-    <div class="gallery-item">
+  <div id="gallery">
+    <div>
       <img src="https://placekitten.com/300/200" alt="Chat mignon" />
     </div>
-    <div class="gallery-item">
+    <div>
       <video controls>
         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
         Votre navigateur ne supporte pas la vidéo.
       </video>
     </div>
-    <div class="gallery-item">
+    <div>
       <audio controls>
         <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg" />
         Votre navigateur ne supporte pas l'audio.
@@ -143,14 +68,13 @@
     </div>
   </div>
 
-  <form id="uploadForm" action="https://formspree.io/f/mwkajnzn" method="POST" enctype="multipart/form-data">
+  <form action="https://formspree.io/f/mwkajnzn" method="POST" enctype="multipart/form-data">
     <input type="file" name="media" accept="image/*,video/*,audio/*" required />
     <br />
     <button type="submit">Envoyer</button>
   </form>
-  
+
   <script>
-    // Optionnel : prévisualisation du fichier sélectionné avant envoi
     const inputFile = document.querySelector('input[type="file"]');
     const gallery = document.getElementById('gallery');
 
@@ -163,20 +87,16 @@
 
       if (file.type.startsWith('image/')) {
         newElem = document.createElement('div');
-        newElem.className = 'gallery-item';
         newElem.innerHTML = `<img src="${url}" alt="Image sélectionnée" />`;
       } else if (file.type.startsWith('video/')) {
         newElem = document.createElement('div');
-        newElem.className = 'gallery-item';
         newElem.innerHTML = `<video controls src="${url}"></video>`;
       } else if (file.type.startsWith('audio/')) {
         newElem = document.createElement('div');
-        newElem.className = 'gallery-item';
         newElem.innerHTML = `<audio controls src="${url}"></audio>`;
       }
 
       if (newElem) {
-        // Insérer avant le formulaire
         gallery.insertBefore(newElem, gallery.firstChild);
       }
     });
